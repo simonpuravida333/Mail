@@ -1,0 +1,84 @@
+textarea {
+    min-height: 400px;
+}
+
+.inboxElement{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 8px;
+	border: solid #cadbe5;
+	border-width: 2px;
+	border-radius: 8px;
+	margin-bottom: 8px;
+	font-family: "Crimson";
+}
+
+.alreadyRead{
+	background-color: lightgrey;
+	border-width: 0px;
+}
+
+.inboxElementLeftSide{
+	
+	color: darkslategray;
+	font-size: 20px;
+}
+.inboxElementRightSide{
+	margin-left: auto;
+	margin-right: 0px;
+	color: olivedrab;
+	font-size: 20px;
+}
+.inboxElement:hover{
+  	background-color: #cadbe5;
+  	cursor: pointer;
+  	color: white;
+}
+
+.openedMail{
+	font-family: "Crimson Text";
+	font-size: 25px;
+}
+.mailTop{
+	color: darkkhaki;
+}
+.mailBody{
+	
+}
+.archiveButton{
+	background-color: #b6ccd8;
+	margin-top: 10px;
+	margin-right: 10px;
+	width: 100px;
+	height: 35px;
+	border-radius:5px;
+	font-size: 18px;
+	border: none;
+}
+.archiveButton:hover{
+  	background-color: #5388a5;
+  	cursor: pointer;
+  	color: white;
+}
+.archiveButton:focus{
+  	background-color: #1e5770;
+  	cursor: pointer;
+  	color: white;
+  	padding: 2px;
+  	outline: none;
+}
+.archivedButton{
+	background-color: 	#1e5770;
+}
+.archivedButton:focus{
+  	background-color: #b6ccd8;
+  }
+  
+.reply{
+	background-color: #e0c75a;
+}
+.reply:hover{
+  	background-color: #aa5b26;
+  	cursor: pointer;
+  	color: white;
+}
