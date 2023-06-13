@@ -1,52 +1,84 @@
+body{
+	background-color: #1F3148;
+    font-family: "Montserrat";
+    color: white;
+}
+
 textarea {
     min-height: 400px;
+}
+
+hr{
+	border: 2px solid white;
+	border-radius: 2px;
+}
+
+a{
+	text-decoration: none;
+}
+
+.navButton{
+	border: 2px solid deepskyblue;
+	border-radius: 8px;
+	color: deepskyblue;
+	background-color: rgba(255,255,255,0);
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.navButton:hover{
+	background-color: deepskyblue;
+	color: white;
+}
+.navButton:focus{
+	background-color: white;
+	color: deepskyblue;
+	outline: none;
+	border: 2px solid white;
 }
 
 .inboxElement{
 	display: flex;
 	flex-wrap: wrap;
 	padding: 8px;
-	border: solid #cadbe5;
-	border-width: 2px;
+	padding-left: 16px;
+	padding-right: 16px;
 	border-radius: 8px;
-	margin-bottom: 8px;
-	font-family: "Crimson";
+	margin-bottom: 10px;
+	background-color: deepskyblue;
+	color: white;
+}
+
+.inboxElement:hover{
+  	background-color: #DCF3FF;
+  	cursor: pointer;
+  	color: deepskyblue;
 }
 
 .alreadyRead{
-	background-color: lightgrey;
+	background-color: #6697B2;
 	border-width: 0px;
+	color: white;
 }
 
 .inboxElementLeftSide{
-	
-	color: darkslategray;
 	font-size: 20px;
 }
+
 .inboxElementRightSide{
 	margin-left: auto;
 	margin-right: 0px;
-	color: olivedrab;
 	font-size: 20px;
-}
-.inboxElement:hover{
-  	background-color: #cadbe5;
-  	cursor: pointer;
-  	color: white;
 }
 
 .openedMail{
 	font-family: "Crimson Text";
 	font-size: 25px;
 }
-.mailTop{
-	color: darkkhaki;
-}
-.mailBody{
-	
-}
+
 .archiveButton{
-	background-color: #b6ccd8;
+	background-color: white;
+	font-family: 'Montserrat';
 	margin-top: 10px;
 	margin-right: 10px;
 	width: 100px;
@@ -56,15 +88,15 @@ textarea {
 	border: none;
 }
 .archiveButton:hover{
-  	background-color: #5388a5;
+  	background-color: #5295B2;
   	cursor: pointer;
   	color: white;
 }
 .archiveButton:focus{
-  	background-color: #1e5770;
+  	background-color: white;
   	cursor: pointer;
-  	color: white;
-  	padding: 2px;
+  	color: black;
+  	padding: 3px;
   	outline: none;
 }
 .archivedButton{
@@ -74,11 +106,16 @@ textarea {
   	background-color: #b6ccd8;
   }
   
-.reply{
-	background-color: #e0c75a;
-}
 .reply:hover{
-  	background-color: #aa5b26;
+  	background-color: #5ACDFF;
   	cursor: pointer;
   	color: white;
+}
+
+#logout{
+	color: deepskyblue;
+	float: right;
+}
+#logout:hover{
+	color: white;
 }

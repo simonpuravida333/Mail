@@ -77,8 +77,6 @@ function load_mailbox(mailbox)
 			let archive = document.createElement('button');
 			let reply = document.createElement('button');
 			mailContent.classList.add("openedMail");
-			top.classList.add("mailTop");
-			body.classList.add("mailBody");
 			archive.classList.add("archiveButton");
 			reply.classList.add("archiveButton","reply");
 			reply.innerHTML = "Reply";
