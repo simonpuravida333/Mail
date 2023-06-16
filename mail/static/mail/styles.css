@@ -25,6 +25,7 @@ a{
 	padding: 3px;
 	padding-left: 10px;
 	padding-right: 10px;
+	margin-right: 5px;
 }
 .navButton:hover{
 	background-color: deepskyblue;
@@ -50,7 +51,7 @@ a{
 }
 
 .inboxElement:hover{
-  	background-color: #DCF3FF;
+  	background-color: white;
   	cursor: pointer;
   	color: deepskyblue;
 }
@@ -74,6 +75,7 @@ a{
 .openedMail{
 	font-family: "Crimson Text";
 	font-size: 25px;
+	margin-bottom: 100px;
 }
 
 .archiveButton{
@@ -100,7 +102,7 @@ a{
   	outline: none;
 }
 .archivedButton{
-	background-color: 	#1e5770;
+ width: 150px;
 }
 .archivedButton:focus{
   	background-color: #b6ccd8;
@@ -110,6 +112,14 @@ a{
   	background-color: #5ACDFF;
   	cursor: pointer;
   	color: white;
+}
+
+.formerMessage
+{
+	border: 2px solid white;
+	padding: 10px;
+	border-radius: 15px;
+	margin-bottom: 10px;
 }
 
 #logout{

@@ -1,6 +1,6 @@
 TODO
 
-if sending: not visible that in sent-folder
-if replying: not going to sent-folder
+if sending: not visible that in sent-folder DONE
+if replying: not going to sent-folder DONE
 if replying: just compresses it to one text!
 when sent: sent box is not up to date.
