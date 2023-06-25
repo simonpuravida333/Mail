@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block body %}
+	<div id = 'overlayBackground'></div>
+	<div id = 'alert'>
+		<div id = 'alertMessage'></div>
+		<div id = 'ok'><strong>OK</strong></div>
+	</div>
     <h2>{{ request.user.email }}</h2>
     <button class="navButton" id="inbox">Inbox</button>
     <button class="navButton" id="compose">Compose</button>
@@ -30,7 +35,7 @@
             </div>
             <div id="formerCorrespondence"></div>
             <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
-            <input type="submit" class="btn btn-primary" value="Send"/>
+            <input id = "sendMail" type="submit" class="btn btn-primary" value="Send"/>
         </form>
     </div>
 {% endblock %}

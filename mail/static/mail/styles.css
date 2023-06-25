@@ -2,19 +2,24 @@ body{
 	background-color: #1F3148;
     font-family: "Montserrat";
     color: white;
+    width: 800px;
+    margin-top: 50px;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
 }
-
 textarea {
     min-height: 400px;
 }
-
 hr{
 	border: 2px solid white;
 	border-radius: 2px;
 }
-
 a{
 	text-decoration: none;
+}
+input[type=submit]{
+	margin-top: 20px;
 }
 
 .navButton{
@@ -37,7 +42,6 @@ a{
 	outline: none;
 	border: 2px solid white;
 }
-
 .inboxElement{
 	display: flex;
 	flex-wrap: wrap;
@@ -49,35 +53,29 @@ a{
 	background-color: deepskyblue;
 	color: white;
 }
-
 .inboxElement:hover{
   	background-color: white;
   	cursor: pointer;
   	color: deepskyblue;
 }
-
 .alreadyRead{
 	background-color: #6697B2;
 	border-width: 0px;
 	color: white;
 }
-
 .inboxElementLeftSide{
 	font-size: 20px;
 }
-
 .inboxElementRightSide{
 	margin-left: auto;
 	margin-right: 0px;
 	font-size: 20px;
+	font-style: italic;
 }
-
 .openedMail{
-	font-family: "Crimson Text";
-	font-size: 25px;
+	font-size: 20px;
 	margin-bottom: 100px;
 }
-
 .archiveButton{
 	background-color: white;
 	font-family: 'Montserrat';
@@ -106,14 +104,18 @@ a{
 }
 .archivedButton:focus{
   	background-color: #b6ccd8;
-  }
-  
+}
 .reply:hover{
   	background-color: #5ACDFF;
   	cursor: pointer;
   	color: white;
 }
-
+.messageFrame
+{
+	border-left: 2px solid white;
+	padding-left: 10px;
+	margin: 10px;
+}
 .formerMessage
 {
 	border: 2px solid white;
@@ -122,6 +124,31 @@ a{
 	margin-bottom: 10px;
 }
 
+#alert{
+	position: absolute;
+	transform: translate(-50%,-50%);
+	left: 50%;
+	top: 50%;
+	border-radius: 15px;
+	background-color: deepskyblue;
+	color: white;
+	padding: 15px;
+	display: none;
+}
+#overlayBackground{
+	position: absolute;
+	left: 0%;
+	top: 0%;
+	height: 100%;
+	width: 100%;
+	background-color: #1F3148;
+	opacity: 0.7;
+	display: none;
+}
+#ok{
+	outline: none;
+	cursor: pointer;
+}
 #logout{
 	color: deepskyblue;
 	float: right;

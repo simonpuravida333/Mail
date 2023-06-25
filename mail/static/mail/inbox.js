@@ -11,14 +11,14 @@ function compose_email(reply)
 	{
 		if (reply.body.search("<p hidden>lastReply</p><hr>") !== -1) formerCorrespondence = reply.body.split("<p hidden>lastReply</p><hr>");
 		else formerCorrespondence = reply.body.split("<p hidden>lastReply</p>");
-		formerCorrespondence[1] = "<i style='color: deepskyblue'>" + reply.timestamp + "</i>" +" • <strong>"+reply.sender+"</strong>:<br>" + formerCorrespondence[1] + "<br>" + "<p hidden>lastReply</p><hr>";
+		formerCorrespondence[1] = "<i style='color: deepskyblue'>" + reply.timestamp + "</i>" +" ● <strong>"+reply.sender+"</strong>:<br>" + formerCorrespondence[1] + "<br>" + "<p hidden>lastReply</p><hr>";
 		document.querySelector('#formerCorrespondence').innerHTML = formerCorrespondence[0]+formerCorrespondence[1];
 		/*
 		let text = formerCorrespondence[1].replaceAll('<strong>','');
 		text = text.replaceAll('</strong>','');
 		text = text.replaceAll('<br>',"\n")+"\n";*/
 		document.querySelector('#compose-recipients').value = reply.sender;
-		if (reply.subject.search('re:') === -1 && reply.subject.search('Re:') === -1 ) document.querySelector('#compose-subject').value = "Re: "+ reply.subject;
+		if (reply.subject.toLowerCase().search('re:') === -1) document.querySelector('#compose-subject').value = "Re: "+ reply.subject;
 		else document.querySelector('#compose-subject').value = reply.subject;
 		document.querySelector('#compose-body').value = ""; 
 	}
@@ -32,12 +32,50 @@ function compose_email(reply)
 		document.querySelector('#compose-body').value = '';
 	}
 	
-    document.querySelector('form').onsubmit = () =>
+   	document.querySelector('form').onsubmit = () =>
     {
-    	let sendTo = document.querySelector('#compose-recipients').value;
-		let topic = document.querySelector('#compose-subject').value;
-		let content = document.querySelector('#compose-body').value;
-		
+    	send(formerCorrespondence);
+    	return false;
+   	}
+}
+
+function send(formerCorrespondence)
+{
+ 	document.querySelector('#compose-body').value = document.querySelector('#compose-body').value.trim();
+	let sendTo = document.querySelector('#compose-recipients').value;
+	let topic = document.querySelector('#compose-subject').value;
+	let content = document.querySelector('#compose-body').value;
+	
+	if (sendTo.trim() === "")
+	{
+		displayAlert('No recipients added.');
+		return;
+	}
+	else if (sendTo.search(',') !== -1)
+	{
+		const allRecipients = sendTo.split(',')
+		for (recipient of allRecipients)
+		{
+			recipient = recipient.trim();
+			if (!(recipient.indexOf('@') > -1 && recipient.indexOf('.') > recipient.indexOf('@') && recipient.length > recipient.indexOf('.')+1))
+			{
+				displayAlert('At least one recipient address is not valid.');
+				return;
+			}
+		}
+	}
+	else if (!(sendTo.indexOf('@') > -1 && sendTo.indexOf('.') > sendTo.indexOf('@') && sendTo.length > sendTo.indexOf('.')+1))
+	{
+		displayAlert('The recipient address is not valid.');
+		return;
+	}
+	else if (content.trim() === "")
+	{
+		displayAlert('The body has no content.');
+		return;
+	}
+	else
+	{
     	fetch('/emails',
     	{
 			method: 'POST',
@@ -45,17 +83,52 @@ function compose_email(reply)
 			({
 				recipients: sendTo,
 				subject: topic,
-				body: formerCorrespondence[0]+formerCorrespondence[1]+content.replaceAll('\n','<br>'),
+				body: formerCorrespondence[0]+formerCorrespondence[1]+"<div class = 'messageFrame'>"+content.replaceAll('\n','<br>')+"</div>",
 			})
 		})
 		.then(response => response.json())
 		.then(result =>
 		{	
-   			console.log(result);
-   			load_mailbox('sent', true);
+			console.log(result);
+			if (result.error !== undefined) displayAlert(result.error);
+   			else load_mailbox('sent', true);
     	});
-    	return false;
-   	}
+	}
+}
+
+window.onkeydown = (event)=>
+{
+	let key = event.keyCode || event.which;
+	const enterKey = 13;
+	const alertDiv = document.getElementById('alert');
+	//const compose = document.getElementById('compose-view');
+	//const composeBody = document.getElementById('compose-body');
+	//... I once had 'enter' send the mail, but removed the feature.
+	
+	if(alertDiv.style.display === 'block' && key === enterKey)
+	{
+		alertDiv.style.display = 'none';
+		document.getElementById('overlayBackground').style.display = 'none';
+	}
+}
+
+function displayAlert(message)
+{
+	const overlayBackground = document.getElementById('overlayBackground');
+	const alertDiv = document.getElementById('alert');
+	const alertMessage = document.getElementById('alertMessage');
+	const ok = document.getElementById('ok');
+	
+	alertMessage.innerHTML = message;
+	alertDiv.style.display = 'block';
+ 	overlayBackground.style.display = 'block';
+	ok.tabIndex = '-1';
+	ok.focus();
+ 	ok.onclick = ()=>
+ 	{
+ 		alertDiv.style.display = 'none';
+ 		overlayBackground.style.display = 'none';
+ 	}
 }
 
 function navTriggers(index)
@@ -191,7 +264,7 @@ function load_mailbox(mailbox, secondPara)
 			 	inboxElement.classList.add("inboxElement");
 			 	rightChild.classList.add("inboxElementRightSide");
 			 	leftChild.classList.add("inboxElementLeftSide");
-			 	leftChild.innerHTML = "From: "+emails[x].sender + " • " + emails[x].subject;
+			 	leftChild.innerHTML = "From: "+emails[x].sender + " ● " + emails[x].subject;
 			 	rightChild.innerHTML = emails[x].timestamp;
 			 	inboxElement.appendChild(leftChild);
 			 	inboxElement.appendChild(rightChild);
@@ -208,8 +281,8 @@ function load_mailbox(mailbox, secondPara)
 	}
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-
+document.addEventListener('DOMContentLoaded', function()
+{
   	// Use buttons to toggle between views
   	document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   	document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
