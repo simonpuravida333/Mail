@@ -46,6 +46,7 @@ function send(formerCorrespondence)
 	let topic = document.querySelector('#compose-subject').value;
 	let content = document.querySelector('#compose-body').value;
 	
+	sendTo = sendTo.replaceAll(';',','); // in case someone seperates recipients using semicolon
 	if (sendTo.trim() === "")
 	{
 		displayAlert('No recipients added.');
@@ -74,26 +75,25 @@ function send(formerCorrespondence)
 		displayAlert('The body has no content.');
 		return;
 	}
-	else
+
+   	fetch('/emails',
 	{
-    	fetch('/emails',
-    	{
-			method: 'POST',
-			body: JSON.stringify
-			({
-				recipients: sendTo,
-				subject: topic,
-				body: formerCorrespondence[0]+formerCorrespondence[1]+"<div class = 'messageFrame'>"+content.replaceAll('\n','<br>')+"</div>",
-			})
+		method: 'POST',
+		body: JSON.stringify
+		({
+			recipients: sendTo,
+			subject: topic,
+			body: formerCorrespondence[0]+formerCorrespondence[1]+"<div class = 'messageFrame'>"+content.replaceAll('\n','<br>')+"</div>",
 		})
-		.then(response => response.json())
-		.then(result =>
-		{	
-			console.log(result);
-			if (result.error !== undefined) displayAlert(result.error);
-   			else load_mailbox('sent', true);
-    	});
-	}
+	})
+	.then(response => response.json())
+	.then(result =>
+	{	
+		console.log(result);
+		if (result.error !== undefined) displayAlert(result.error);
+			else load_mailbox('sent', true);
+	});
+	
 }
 
 window.onkeydown = (event)=>

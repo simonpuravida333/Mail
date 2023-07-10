@@ -122,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'mail.User'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
