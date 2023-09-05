@@ -91,9 +91,8 @@ function send(formerCorrespondence)
 	{	
 		console.log(result);
 		if (result.error !== undefined) displayAlert(result.error);
-			else load_mailbox('sent', true);
+		else load_mailbox('sent', true);
 	});
-	
 }
 
 window.onkeydown = (event)=>

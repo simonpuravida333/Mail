@@ -42,12 +42,16 @@ def compose(request):
     for email in emails:
         try:
             user = User.objects.get(email=email)
+            if user.username == request.user.username:
+            	return JsonResponse({
+                "error": f"Everyone experiences loneliness. But sending yourself emails is not the solution."
+            	}, status=400)
             recipients.append(user)
         except User.DoesNotExist:
             return JsonResponse({
                 "error": f"User with email {email} does not exist."
             }, status=400)
-
+    
     # Get contents of email
     subject = data.get("subject", "")
     body = data.get("body", "")
