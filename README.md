@@ -4,6 +4,7 @@ To run it, you need python and Django.
 Go to the root of the folder and enter the command:
 
 ### python manage.py runserver
+#### Add /mail to your local server address.
 
 #### And you're good to go :)
 
